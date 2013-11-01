@@ -12,14 +12,14 @@
 
 require_once "pantone_colors.php";
 
-$header_filename = "UIColor+Pantone.h";
-$main_filename = "UIColor+Pantone.m";
+$header_filename = "NSColor+Pantone.h";
+$main_filename = "NSColor+Pantone.m";
 $markdown_filename = "README.md";
 
 $image_width = 32;
 $image_height = 32;
 
-$github_url = "https://raw.github.com/CaptainRedmuff/UIColor-Pantone/master/";
+$github_url = "https://raw.github.com/CaptainRedmuff/NSColor-Pantone/master/";
 
 $header_file_meta = "//\n";
 $header_file_meta .= "//*******\n";
@@ -31,9 +31,9 @@ $header_file_meta .= "//\n";
 $header_file_meta .= "//*******\n";
 $header_file_meta .= "//\n";
 $header_file_meta .= "\n";
-$header_file_meta .= "#import <UIKit/UIKit.h>\n";
+$header_file_meta .= "#import <AppKit/AppKit.h>\n";
 $header_file_meta .= "\n";
-$header_file_meta .= "@interface UIColor (Pantone)\n\n";
+$header_file_meta .= "@interface NSColor (Pantone)\n\n";
 
 $header_file_footer_meta = "\n@end\n";
 
@@ -49,13 +49,13 @@ $main_file_meta .= "//\n";
 $main_file_meta .= "\n";
 $main_file_meta .= "#import \"$header_filename\"\n";
 $main_file_meta .= "\n";
-$main_file_meta .= "@implementation UIColor (Pantone)\n\n";
+$main_file_meta .= "@implementation NSColor (Pantone)\n\n";
 
 $main_file_footer_meta = "@end\n";
 
-$markdown_file_meta = "UIColor+Pantone\n";
+$markdown_file_meta = "NSColor+Pantone\n";
 $markdown_file_meta .= "===============\n\n";
-$markdown_file_meta .= "UIColor category - because everybody loves pantone!\n\n";
+$markdown_file_meta .= "NSColor category - because everybody loves pantone!\n\n";
 $markdown_file_meta .= "List of " . count($colors) . " colors sourced from: <a href=\"http://www.cal-print.com/InkColorChart.htm\" title=\"Pantone Colors\">List of Pantone colors</a>\n\n";
 $markdown_file_meta .= "<table>\n\n";
 
@@ -74,8 +74,8 @@ fwrite($markdown_file_handle, $markdown_file_meta);
 
 foreach($colors as $key => $value)
 {
-	$name = uicolor_name($key);
-	$color = uicolor_from_hex($value);
+	$name = nscolor_name($key);
+	$color = nscolor_from_hex($value);
 
 	generate_image_from_hex($key, $value, $image_width, $image_height);
 
@@ -86,7 +86,7 @@ foreach($colors as $key => $value)
 	$main_code .= "\treturn " . pantone_color_from_hex($value) . ";\n";
 	$main_code .= "}\n\n";
 
-	$markdown_code = uicolor_table_row($key, $value, $image_width, $image_height, $github_url . "images/");
+	$markdown_code = nscolor_table_row($key, $value, $image_width, $image_height, $github_url . "images/");
 
 	fwrite($header_file_handle, $header_code);
 	fwrite($main_file_handle, $main_code);
@@ -100,13 +100,13 @@ $main_code .= "\tstatic NSCache *cache = nil;\n\n";
 $main_code .= "\tif(!cache)\n";
 $main_code .= "\t{\n";
 $main_code .= "\t\tcache = [NSCache new];\n\n";
-$main_code .= "\t\t[cache setName:@\"UIColor+Pantone\"];\n";
+$main_code .= "\t\t[cache setName:@\"NSColor+Pantone\"];\n";
 $main_code .= "\t}\n\n";
 $main_code .= "\tNSString *cacheKey = [[self class] cacheKeyWithRed:red green:green blue:blue alpha:alpha];\n\n";
-$main_code .= "\tUIColor *color = [cache objectForKey:cacheKey];\n\n";
+$main_code .= "\NSColor *color = [cache objectForKey:cacheKey];\n\n";
 $main_code .= "\tif(!color)\n";
 $main_code .= "\t{\n";
-$main_code .= "\t\tcolor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];\n\n";
+$main_code .= "\t\tcolor = [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:alpha];\n\n";
 $main_code .= "\t\t[cache setObject:color forKey:cacheKey];\n";
 $main_code .= "\t}\n\n";
 $main_code .= "\treturn color;\n";
