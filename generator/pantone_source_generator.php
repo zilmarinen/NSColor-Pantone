@@ -103,7 +103,7 @@ $main_code .= "\t\tcache = [NSCache new];\n\n";
 $main_code .= "\t\t[cache setName:@\"NSColor+Pantone\"];\n";
 $main_code .= "\t}\n\n";
 $main_code .= "\tNSString *cacheKey = [[self class] cacheKeyWithRed:red green:green blue:blue alpha:alpha];\n\n";
-$main_code .= "\NSColor *color = [cache objectForKey:cacheKey];\n\n";
+$main_code .= "\tNSColor *color = [cache objectForKey:cacheKey];\n\n";
 $main_code .= "\tif(!color)\n";
 $main_code .= "\t{\n";
 $main_code .= "\t\tcolor = [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:alpha];\n\n";
