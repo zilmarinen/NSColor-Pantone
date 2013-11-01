@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "NSColor-Pantone"
-  s.version      = "0.1"
+  s.version      = "0.2"
   s.summary      = "Pantone colors NSColor category"
 
   s.description  = <<-DESC
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.author       = { "Zack Brown" => "zack@zackbrown.co.uk" }
 
-  s.platform     = :ios, '5.0'
+  s.platform     = :osx, '10.6'
 
   s.source       = { :git => "https://github.com/CaptainRedmuff/NSColor-Pantone.git", :tag => "#{s.version}" }
 
