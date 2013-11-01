@@ -4980,7 +4980,7 @@
 
 	NSString *cacheKey = [[self class] cacheKeyWithRed:red green:green blue:blue alpha:alpha];
 
-\NSColor *color = [cache objectForKey:cacheKey];
+	NSColor *color = [cache objectForKey:cacheKey];
 
 	if(!color)
 	{
